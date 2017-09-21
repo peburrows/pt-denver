@@ -10,16 +10,22 @@
       }
 
       #title {
-        font-size: 4.5rem;
+        font-size: 5rem;
         text-transform: uppercase;
         margin: 0;
+        color: #fff;
+        text-shadow: -2px 2px #333;
       }
+
+      .flip-clock-label { display: none; }
     </style>
   </head>
   <body>
     <div class="grid-x">
-      <h1 id="title">Denver</h1>
-      <div class="clock"></div>
+      <div class="cell">
+        <h1 id="title">Denver</h1>
+      </div>
+      <div class="cell clock"></div>
     </div>
 
     <script
@@ -36,14 +42,15 @@
         ['denver-dusk2.jpg',     'rgba(89, 133, 142, 1.0)'],
         ['denver-mountains.png', 'rgba(121, 179, 228, 1.0)'],
         ['denver-night.jpg',     'rgba(12, 23, 55, 1.0)'],
-        ['denver-pavilion.jpg',  'rgba(255, 255, 255, 1.0)'],
+        ['denver-pavilion.jpg',  'rgba(255, 255, 255, 1.0)', '#333'],
         ['red-rocks-night.jpg',  'rgba(1, 1, 3, 1.0)']
       ];
 
       var which = Math.round(Math.random() * (images.length-1));
       var styles = {
         background: 'url(assets/images/' + images[which][0] + ') bottom center no-repeat fixed ' + images[which][1],
-        backgroundSize: '100% auto'
+        // backgroundSize: '100% auto'
+        backgroundSize: 'cover'
       }
       console.log(styles)
       
