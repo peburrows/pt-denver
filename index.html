@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="assets/css/foundation.min.css">
+    <link rel="stylesheet" href="assets/css/flipclock.css">
+    <link href="https://fonts.googleapis.com/css?family=Asap+Condensed" rel="stylesheet">
+    <style type="text/css">
+      body {
+        font-family: 'Asap Condensed', sans-serif;
+        font-size: 10px;
+      }
+
+      #title {
+        font-size: 4.5rem;
+        text-transform: uppercase;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-x">
+      <h1 id="title">Denver</h1>
+      <div class="clock"></div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+    <script src="assets/js/flipclock.min.js"></script>
+
+    <script type="text/javascript">
+
+      var images = [
+        ['denver-daylight.jpg',  'rgba(168, 211, 246, 1.0)'],
+        ['denver-dusk1.jpg',     'rgba(228, 175, 181, 1.0)'],
+        ['denver-dusk2.jpg',     'rgba(89, 133, 142, 1.0)'],
+        ['denver-mountains.png', 'rgba(121, 179, 228, 1.0)'],
+        ['denver-night.jpg',     'rgba(12, 23, 55, 1.0)'],
+        ['denver-pavilion.jpg',  'rgba(255, 255, 255, 1.0)'],
+        ['red-rocks-night.jpg',  'rgba(1, 1, 3, 1.0)']
+      ];
+
+      var which = Math.round(Math.random() * (images.length-1));
+      var styles = {
+        background: 'url(assets/images/' + images[which][0] + ') bottom center no-repeat fixed ' + images[which][1],
+        backgroundSize: '100% auto'
+      }
+      console.log(styles)
+      
+      $('body').css(styles);
+
+      var clock;
+      $(document).ready(function() {
+        var currentDate = new Date()
+          // 10/28/2017 @ 7:30pm CDT
+          , denverDate  = new Date(2017, 8, 28, 19, 30);
+
+        // make sure this works in any timezone by bumping things to the UTC time
+        denverDate.setUTCDate(29);
+        denverDate.setUTCHours(0);
+
+        // Calculate the difference in seconds between the future and current date
+        var diff = denverDate.getTime() / 1000 - currentDate.getTime() / 1000;
+
+        // Instantiate a coutdown FlipClock
+        clock = $('.clock').FlipClock(diff, {
+          clockFace: 'DailyCounter',
+          countdown: true
+        });
+      });
+    </script>
+
+  </body>
+</html>
