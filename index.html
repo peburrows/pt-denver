@@ -11,21 +11,33 @@
 
       #title {
         font-size: 5rem;
+        line-height: 5rem;
         text-transform: uppercase;
         margin: 0;
         color: #fff;
-        text-shadow: -2px 2px #333;
+        text-shadow: -4px 4px 2px rgba(75,75,75,0.8);
+        margin: 0;
       }
 
       .flip-clock-label { display: none; }
+      .banner {
+        padding: 1.5rem 0;
+        width: 100%;
+        margin-top: 200px;
+      }
+      .clock {
+        margin-left: -2px;
+      }
     </style>
   </head>
   <body>
-    <div class="grid-x">
-      <div class="cell">
+    <div class="grid-x banner">
+      <div class="cell small-12 large-4 large-offset-4">
         <h1 id="title">Denver</h1>
       </div>
-      <div class="cell clock"></div>
+      <div class="cell small-12 large-4 large-offset-4">
+        <div class="clock"></div>
+      </div>
     </div>
 
     <script
@@ -42,19 +54,25 @@
         ['denver-dusk2.jpg',     'rgba(89, 133, 142, 1.0)'],
         ['denver-mountains.png', 'rgba(121, 179, 228, 1.0)'],
         ['denver-night.jpg',     'rgba(12, 23, 55, 1.0)'],
-        ['denver-pavilion.jpg',  'rgba(255, 255, 255, 1.0)', '#333'],
+        ['denver-pavilion.jpg',  'rgba(255, 255, 255, 1.0)', 'rgba(112, 115, 34, 1.0)', 'rgba(255,255,255,0.8'],
         ['red-rocks-night.jpg',  'rgba(1, 1, 3, 1.0)']
       ];
 
-      var which = Math.round(Math.random() * (images.length-1));
+      var which = images[Math.round(Math.random() * (images.length-1))];
+      // which = images[5]
       var styles = {
-        background: 'url(assets/images/' + images[which][0] + ') bottom center no-repeat fixed ' + images[which][1],
+        background: 'url(assets/images/' + which[0] + ') bottom center no-repeat fixed ' + which[1],
         // backgroundSize: '100% auto'
         backgroundSize: 'cover'
       }
-      console.log(styles)
       
       $('body').css(styles);
+      if(which[2]){
+        $('#title').css({
+          color: which[2],
+          textShadow: '-4px 4px ' + which[3]
+        })
+      }
 
       var clock;
       $(document).ready(function() {
